@@ -7,8 +7,32 @@ def anagram(string1, string2):
              False otherwise.
     """
     # To do
-    pass
-
+    dic1 = {}
+    dic2 = {}
+    for i in string1:
+        if i.isalpha():
+            if i in dic1:
+                dic1[i] += 1
+            else:
+                dic1[i] = 0
+        else:
+            continue
+        
+    for i in string2:
+        if i.isalpha():
+            if i in dic2:
+                dic2[i] += 1
+            else:
+                dic2[i] = 0
+        else:
+            continue
+    if dic1 != dic2:
+        return False
+    return True
+        
+    
+        
+    
 '''
 note: 
 To get autograded on gradescope, you program can't print anything.
