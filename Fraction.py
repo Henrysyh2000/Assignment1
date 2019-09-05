@@ -14,7 +14,10 @@ class Fraction:
         :param other: Fraction -- the other fraction number.
         :return: Fraction -- a **new** Fraction object, which is the sum of self + other.
         """
-        pass
+        up = self.numerator * other.denominator + other.numerator * self.denominator
+        down = self.denominator * other.denominator
+        res = Fraction(up, down)
+        return res
 
     def __iadd__(self, other):
         """
@@ -23,7 +26,11 @@ class Fraction:
         :param other: Fraction -- the other fraction number.
         :return: self. The value of self should become the sum of self + other.
         """
-        pass
+        self.numerator = self.numerator * other.denominator + other.numerator * self.denominator
+        self.denominator = self.denominator * other.denominator
+        res = str(self.numerator) + ' / ' + str(self.denominator)
+        return res
+
 
     def __sub__(self, other):
         """
@@ -33,7 +40,11 @@ class Fraction:
         :param other: Fraction -- the other fraction number.
         :return: Fraction -- a **new** Fraction object, which is the subtraction of self - other.
         """
-        pass
+        up = self.numerator * other.denominator - other.numerator * self.denominator
+        down = self.denominator * other.denominator
+        res = Fraction(up, down)
+        return res
+
 
     def __mul__(self, other):
         """
@@ -43,7 +54,10 @@ class Fraction:
         :param other: Fraction -- the other fraction number.
         :return: Fraction -- a **new** Fraction object, which is the multiplication of self * other.
         """
-        pass
+        up = self.numerator * other.numerator
+        down = self.denominator * other.denominator
+        res = Fraction(up, down)
+        return res
 
     def __eq__(self, other):
         """
@@ -57,7 +71,13 @@ class Fraction:
         :return: True if the float value of self is equal to other;
                  False if the float value of self is not equal to other.
         """
-        pass
+        self.reduce()
+        other.reduce()
+        if (self.numerator == other.numerator) and (self.denominator == other.denominator):
+            return True
+        elif (self.numerator == -other.numerator) and (self.denominator == -other.denominator):
+            return True
+        return False
 
     def reduce(self):
         """
@@ -67,7 +87,11 @@ class Fraction:
 
         :return: Nothing.
         """
-        pass
+        num = min(self.numerator, self.denominator)
+        while (self.numerator % num != 0) or (self.denominator % num != 0):
+            num = abs(num) - 1
+        self.numerator = self.numerator // num
+        self.denominator //= num
 
     def __str__(self):
         """
@@ -80,7 +104,7 @@ class Fraction:
 
         :return: The string representation of self Fraction object.
         """
-        return "MODIFY THIS."
+        return str(self.numerator) + ' / ' + str(self.denominator)
 
 
 
