@@ -6,7 +6,11 @@ def number_of_times_divideby2(n):
              before getting a value less than 2.
     """
     # To do
-    pass
+    count = 0
+    while n >= 2:
+        n //= 2
+        count += 1
+    return count
 
 '''
 note: 
