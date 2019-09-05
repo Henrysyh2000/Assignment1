@@ -6,8 +6,30 @@ def vigenere_encrypt(plain, key):
     :return: String -- the cipher python string text.
     """
     # To do
-    pass
-
+    res = ""
+    table = [[]]
+    for i in range(26):
+        table[0].append(chr(65 + i))
+    for i in range(25):
+        temp = table[i][1 : len(table[0])]
+        temp.append(table[i][0])
+        table.append(temp)   
+    if len(key) < len(plain):
+        i = 0
+        num = len(key)
+        while len(key) != len(plain):
+            key += key[i]
+            i += 1
+            i %= num
+    elif len(key) > len(plain):
+        key = key[:len(plain)]
+        print(key)
+    for i in range(len(plain)):
+        res += table[ord(plain[i]) - 65][ord(key[i]) - 65]
+    return res
+    
+        
+        
 def vigenere_decrypt(cipher, key):
     '''
     :param cipher: String -- a python input string. The cipher text.
@@ -16,7 +38,36 @@ def vigenere_decrypt(cipher, key):
     :return: String -- the plain python string text.
     '''
     # To do
-    pass
+    res = ""
+    table = [[]]
+    for i in range(26):
+        table[0].append(chr(65 + i))
+    for i in range(25):
+        temp = table[i][1 : len(table[0])]
+        temp.append(table[i][0])
+        table.append(temp)
+    if len(key) < len(cipher):
+        i = 0
+        num = len(key)
+        while len(key) != len(cipher):
+            key += key[i]
+            i += 1
+            i %= num
+    elif len(key) > len(cipher):
+        key = key[:len(cipher)]
+
+    count = 0
+    for i in key:
+        count2 = 0
+        num = ord(i) - 65
+        for c in table[num]:
+            #print(count, count2)
+            #print(count)
+            if c == cipher[count]:
+                res += table[0][count2]
+            count2 += 1
+        count += 1
+    return res
 
 
 '''
